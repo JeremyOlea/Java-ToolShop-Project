@@ -4,7 +4,6 @@ import javax.swing.*;
 import java.io.*;
 import java.util.*;
 import javax.swing.UIManager;
-import javax.swing.UIManager.*;
 /**
  * A front end to display a database of student ids, faculties, majors, and years.
  * @author Oscar Ryan Wong, Michael Jeremy Ustaris Olea
@@ -16,7 +15,9 @@ public class FrontEnd extends JFrame {
   public static void main(String[] args) {  
     try { 
       UIManager.setLookAndFeel("com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel"); 
-    } catch(Exception ignored){} 
+    } catch(Exception ignored) {
+      
+    } 
     FrontEnd frontEnd = new FrontEnd();
   }
 
@@ -88,7 +89,8 @@ public class FrontEnd extends JFrame {
       @Override
       public void actionPerformed(ActionEvent e) {
         insert();
-        displayTree();
+        if(bst.root != null)
+          displayTree();
       }
     });
 
@@ -102,7 +104,8 @@ public class FrontEnd extends JFrame {
     browse.addActionListener(new ActionListener() {
       @Override
       public void actionPerformed(ActionEvent e) {
-        displayTree();
+        if(bst.root != null)
+          displayTree();
       }
     });
 
@@ -110,7 +113,8 @@ public class FrontEnd extends JFrame {
           @Override
           public void actionPerformed(ActionEvent e) {
             buildTree();
-            displayTree();
+            if(bst.root != null)
+              displayTree();
           }
     });
 
@@ -177,13 +181,13 @@ public class FrontEnd extends JFrame {
       String[] line;
       while(scan.hasNextLine()) {
         String s = scan.nextLine();
-        line = s.split("\\s+");
-        bst.insert(line[1], line[2], line[3], line[4]);
+        line = s.trim().split("\\s+");
+        bst.insert(line[0], line[1], line[2], line[3]);
       }
       scan.close();
       JOptionPane.showMessageDialog(null, "Done!");
     } catch (FileNotFoundException e) {
-      JOptionPane.showMessageDialog(null, "File does not exist");
+      JOptionPane.showMessageDialog(null, "File does not exist!");
     }
   }
   
@@ -192,7 +196,6 @@ public class FrontEnd extends JFrame {
    */
   public void displayTree() {
     display.setText(bst.getString(bst.root));
-    System.out.println(bst.getString(bst.root));
   }
   
   /**

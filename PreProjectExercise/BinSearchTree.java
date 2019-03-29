@@ -147,8 +147,8 @@ class BinSearchTree {
 		String str = "";
         if (cur.left!=null)
             str += getString(cur.left);
-        String s = cur.data.id+"        "+cur.data.faculty+"     "+
-                                 cur.data.major+ "       "+cur.data.year + "\n";
+        String s = cur.data.id+ "\t" +cur.data.faculty+ "\t" +
+                                 cur.data.major+ "\t" +cur.data.year + "\n";
         str = str.concat(s);
         if (cur.right!=null)
             str += getString(cur.right);
