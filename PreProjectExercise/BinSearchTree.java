@@ -142,4 +142,16 @@ class BinSearchTree {
 		if (cur.right!=null)
 			print_tree(cur.right,out);
 	} 
+
+	public String getString(Node cur) {
+		String str = "";
+        if (cur.left!=null)
+            str += getString(cur.left);
+        String s = cur.data.id+"        "+cur.data.faculty+"     "+
+                                 cur.data.major+ "       "+cur.data.year + "\n";
+        str = str.concat(s);
+        if (cur.right!=null)
+            str += getString(cur.right);
+        return str;
+	} 
 }
