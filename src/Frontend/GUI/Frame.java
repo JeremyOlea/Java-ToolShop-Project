@@ -37,6 +37,7 @@ public class Frame extends JFrame {
       @Override
       public void actionPerformed(ActionEvent e) {
         String toolsList = listener.actionPerformed("GET/TOOLS");
+        System.out.println(toolsList);
       }
     });
 

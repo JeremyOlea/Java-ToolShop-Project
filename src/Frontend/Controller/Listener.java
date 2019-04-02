@@ -15,7 +15,7 @@ public class Listener {
   public String actionPerformed(String action) {
     if (action.equals("GET/TOOLS")) {
       try {
-        client.displayAllTools();
+        return client.displayAllTools();
       } catch (IOException e) {
         return "There was an error fetching tools.";
       }
