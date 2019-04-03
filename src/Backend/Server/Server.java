@@ -4,14 +4,35 @@ import java.io.IOException;
 import java.net.*;
 import java.io.*;
 import java.util.*;
-
+/**
+ * A server application
+ * @author Michael Jeremy Olea, Oscar Wong
+ * @version 1.0
+ * @since April 4th, 2018
+ */
 public class Server {
+    /**
+     * Socekt for server
+     */
     private ServerSocket serverSocket;
+    /**
+     * Printing back to client
+     */
     private PrintWriter socketOut;
+    /**
+     * Socket for client
+     */
     private Socket clientSocket;
+    /**
+     * Reading input from client
+     */
     private BufferedReader socketIn;
 
 
+    /**
+     * Constructor for Server
+     * @param portNumber port used for Socket
+     */
     public Server(int portNumber) {
         try {
             serverSocket = new ServerSocket(portNumber);
@@ -24,6 +45,9 @@ public class Server {
         }
     }
 
+    /**
+     * Waits for client input then acts accordingly to the input
+     */
     public void communicate() {
         ArrayList<Supplier> suppliers = new ArrayList<Supplier>();
 		readSuppliers(suppliers);
@@ -33,29 +57,42 @@ public class Server {
         while(true) {
             try {
                 input = socketIn.readLine();
+                System.out.println(input);
                 if(input.equals("GET/TOOLS")) {
                     Inventory temp = theShop.getTheInventory();
                     String output = "";
                     for(int i = 0; i < temp.getItemList().size(); i++) {
+                        //output += temp.getItemList().get(i).toStringWithNoLabels();
                         output += temp.getItemList().get(i).toString();
                     }
+                    //socketOut.println("Item ID\tItem Name\t\tItem Quantity");
                     socketOut.println(output);
+                    socketOut.println("GET/TOOLS");
                 }
 
             } catch(IOException e) {
                 System.err.println(e.getMessage());
-            }
-            try {
-                socketIn.close();
-                socketOut.close();
-                serverSocket.close();
-            } catch(IOException e) {
-                e.printStackTrace();
-            }
-            
+            }           
         }
     }
 
+    /**
+     * CLoses the socket, printwrite and bufferedreader
+     */
+    public void close() {
+        try {
+            socketIn.close();
+            socketOut.close();
+            serverSocket.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * Reads all suppliers from text file into an ArrayList
+     * @param suppliers ArrayList of all suppliers
+     */
     public void readSuppliers(ArrayList<Supplier> suppliers) {
 		try {
             FileReader fr = new FileReader("suppliers.txt");
@@ -72,6 +109,11 @@ public class Server {
 		}
     }
     
+    /**
+     * Reads all the items from text file
+     * @param suppliers ArrayList of suppliers
+     * @return ArrayList of items read from file
+     */
     private ArrayList<Item> readItems(ArrayList<Supplier> suppliers) {
 
 		ArrayList<Item> items = new ArrayList<Item>();
@@ -100,6 +142,12 @@ public class Server {
 		return items;
     }
     
+    /**
+     * Finds supplier given an ID
+     * @param supplierId ID of supplier to be found
+     * @param suppliers ArrayList of all suppliers
+     * @return The supplier with the same ID
+     */
     private Supplier findSupplier(int supplierId, ArrayList<Supplier> suppliers) {
 		Supplier theSupplier = null;
 		for (Supplier s : suppliers) {
@@ -112,6 +160,10 @@ public class Server {
 		return theSupplier;
     }
     
+    /**
+     * Creates server object and runs communicate class
+     * @param args Command line arguments
+     */
     public static void main(String[] args) {
         Server server = new Server(5050);
         server.communicate();

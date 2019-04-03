@@ -6,10 +6,21 @@
   "configurations": [
     {
       "type": "java",
-      "name": "Debug (Launch)-App<ToolShop>",
+      "name": "Client",
       "request": "launch",
-      "mainClass": "Frontend.App",
-      "projectName": "ToolShop"
+      "mainClass": "Frontend.App"
     },
+    {
+      "type": "java",
+      "name": "Server",
+      "request": "launch",
+      "mainClass": "Backend.Server.Server"
+    }
+  ],
+  "compounds": [
+    {
+      "name": "Client + Server",
+      "configurations": ["Server", "Client"]
+    }
   ]
 }
