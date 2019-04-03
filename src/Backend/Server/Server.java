@@ -45,6 +45,14 @@ public class Server {
             } catch(IOException e) {
                 System.err.println(e.getMessage());
             }
+            try {
+                socketIn.close();
+                socketOut.close();
+                serverSocket.close();
+            } catch(IOException e) {
+                e.printStackTrace();
+            }
+            
         }
     }
 
@@ -105,7 +113,8 @@ public class Server {
     }
     
     public static void main(String[] args) {
-        
+        Server server = new Server(5050);
+        server.communicate();
     }
 
 }
