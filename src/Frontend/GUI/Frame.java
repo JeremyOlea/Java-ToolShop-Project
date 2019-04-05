@@ -78,7 +78,13 @@ public class Frame extends JFrame {
       }
     });
 
+    JButton search = new JButton("Search");
+    JButton decrease = new JButton("Decrease Quantity");
+    JButton check = new JButton("Check Item Quantity");
+    southPanel.add(search);
     southPanel.add(displayAllTools);
+    southPanel.add(decrease);
+    southPanel.add(check);
   }
 
   /**
