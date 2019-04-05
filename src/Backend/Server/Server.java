@@ -59,21 +59,22 @@ public class Server {
                 input = socketIn.readLine();
                 System.out.println(input);
                 if(input.equals("GET/TOOLS")) {
-                    Inventory temp = theShop.getTheInventory();
-                    String output = "";
-                    for(int i = 0; i < temp.getItemList().size(); i++) {
-                        //output += temp.getItemList().get(i).toStringWithNoLabels();
-                        output += temp.getItemList().get(i).toString();
-                    }
-                    //socketOut.println("Item ID\tItem Name\t\tItem Quantity");
-                    socketOut.println(output);
-                    socketOut.println("GET/TOOLS");
+                    getTools(theShop);
                 }
-
             } catch(IOException e) {
                 System.err.println(e.getMessage());
             }           
         }
+    }
+
+    public void getTools(Shop theShop) {
+        Inventory temp = theShop.getTheInventory();
+        String output = "";
+        for(int i = 0; i < temp.getItemList().size(); i++) {
+            output += temp.getItemList().get(i).toString();
+        }
+        socketOut.println(output);
+        socketOut.println("GET/TOOLS");
     }
 
     /**
