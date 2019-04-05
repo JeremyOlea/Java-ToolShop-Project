@@ -125,7 +125,6 @@ public class Inventory {
 	 * @param id id of item to be searched for
 	 */
 	public Item searchForItem(int id) {
-		// TODO Auto-generated method stub
 		for (Item i: itemList) {
 			if (i.getItemId() == id)
 				return i;
@@ -138,7 +137,6 @@ public class Inventory {
 	 * @return A string of the contents inside the order
 	 */
 	public String printOrder() {
-		// TODO Auto-generated method stub
 		return myOrder.toString();
 	}
 

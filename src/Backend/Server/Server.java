@@ -12,7 +12,7 @@ import java.util.*;
  */
 public class Server {
     /**
-     * Socekt for server
+     * Socket for server
      */
     private ServerSocket serverSocket;
     /**
