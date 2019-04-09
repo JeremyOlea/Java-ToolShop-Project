@@ -49,7 +49,7 @@ public class Inventory {
 	 * @param name the name of the item
 	 * @return the item with the same name as the param
 	 */
-	synchronized public Item manageItem (String name){
+	public Item manageItem (String name){
 		Item theItem = decreaseItem (name);
 		
 		if (theItem != null){
@@ -73,7 +73,7 @@ public class Inventory {
 	 * @param name the name of the item
 	 * @return the item
 	 */
-	synchronized private Item decreaseItem (String name) {
+	private Item decreaseItem (String name) {
 		
 		Item theItem = searchForItem (name);
 		
