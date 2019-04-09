@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.net.*;
 import java.io.*;
 import java.util.*;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 /**
  * A server application
  * @author Michael Jeremy Olea, Oscar Wong
@@ -16,18 +18,9 @@ public class Server {
      */
     private ServerSocket serverSocket;
     /**
-     * Printing back to client
+     * A thread pool to hold multiple threads
      */
-    private PrintWriter socketOut;
-    /**
-     * Socket for client
-     */
-    private Socket clientSocket;
-    /**
-     * Reading input from client
-     */
-    private BufferedReader socketIn;
-
+    private ExecutorService pool;
 
     /**
      * Constructor for Server
@@ -36,12 +29,9 @@ public class Server {
     public Server(int portNumber) {
         try {
             serverSocket = new ServerSocket(portNumber);
-            clientSocket = serverSocket.accept();
-            System.out.println("Server in now running...");
-            socketOut = new PrintWriter(clientSocket.getOutputStream(), true);
-            socketIn = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
+            pool = Executors.newCachedThreadPool();
         } catch(IOException e) {
-            System.out.println("error in constructor");
+            System.out.println("Error in constructor");
         }
     }
 
@@ -51,45 +41,18 @@ public class Server {
     public void communicate() {
         ArrayList<Supplier> suppliers = new ArrayList<Supplier>();
 		readSuppliers(suppliers);
-		Inventory theInventory = new Inventory(readItems(suppliers));
-        Shop theShop = new Shop(theInventory, suppliers);
-        String input = "";
-        while(true) {
-            try {
-                input = socketIn.readLine();
-                System.out.println(input);
-                if(input.equals("GET/TOOLS")) {
-                    getTools(theShop);
-                }
-            } catch(IOException e) {
-                System.err.println(e.getMessage());
-            }           
-        }
-    }
-
-    public void getTools(Shop theShop) {
-        Inventory temp = theShop.getTheInventory();
-        String output = "";
-        for(int i = 0; i < temp.getItemList().size(); i++) {
-            output += temp.getItemList().get(i).toString();
-        }
-        socketOut.println(output);
-        socketOut.println("GET/TOOLS");
-    }
-
-    /**
-     * CLoses the socket, printwrite and bufferedreader
-     */
-    public void close() {
+        Inventory theInventory = new Inventory(readItems(suppliers));
         try {
-            socketIn.close();
-            socketOut.close();
-            serverSocket.close();
-        } catch (IOException e) {
+            while(true) {
+                Shop theShop = new Shop(theInventory, suppliers, serverSocket.accept());
+                pool.execute(theShop);
+            }
+        } catch(IOException e) {
             e.printStackTrace();
         }
+        
     }
-
+    
     /**
      * Reads all suppliers from text file into an ArrayList
      * @param suppliers ArrayList of all suppliers
