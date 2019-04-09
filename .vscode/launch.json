@@ -15,12 +15,22 @@
       "name": "Server",
       "request": "launch",
       "mainClass": "Backend.Server.Server"
+    },
+    {
+      "type": "java",
+      "name": "Client2",
+      "request": "launch",
+      "mainClass": "Frontend.App"
     }
   ],
   "compounds": [
     {
       "name": "Client + Server",
       "configurations": ["Server", "Client"]
+    },
+    {
+      "name": "2 Clients + Server",
+      "configurations": ["Server", "Client", "Client2"]
     }
   ]
 }
