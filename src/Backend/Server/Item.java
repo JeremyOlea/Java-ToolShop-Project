@@ -62,7 +62,7 @@ public class Item {
 	 * Decreases the item quantity
 	 * @return it the item was returned or not
 	 */
-	synchronized public boolean decreaseItemQuantity () {
+	public boolean decreaseItemQuantity () {
 		if (itemQuantity > 0) {
 			itemQuantity--;
 		    return true;	
