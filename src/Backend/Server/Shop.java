@@ -39,7 +39,7 @@ public class Shop implements Runnable{
 	 * @param inventory Inventory for the Shop.
 	 * @param suppliers Suppliers to the Shop.
 	 */
-	public Shop (Inventory inventory, ArrayList <Supplier> suppliers, Socket s) {
+	public Shop (Socket s, Inventory inventory, ArrayList <Supplier> suppliers) {
 		clientSocket = s;		
 		theInventory = inventory;
 		supplierList = suppliers;
@@ -70,14 +70,19 @@ public class Shop implements Runnable{
         }
 	}
 
+	public void sendString(String send) {
+        socketOut.println(send);
+        socketOut.flush();
+    }
+
     public void getTools() {
         Inventory temp = this.getTheInventory();
         String output = "";
         for(int i = 0; i < temp.getItemList().size(); i++) {
             output += temp.getItemList().get(i).toString();
         }
-        socketOut.println(output);
-        socketOut.println("GET/TOOLS");
+        sendString(output);
+        sendString("GET/TOOLS");
 	}
     /**
      * CLoses the socket, printwrite and bufferedreader

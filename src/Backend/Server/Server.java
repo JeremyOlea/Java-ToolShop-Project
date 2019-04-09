@@ -44,7 +44,7 @@ public class Server {
         Inventory theInventory = new Inventory(readItems(suppliers));
         try {
             while(true) {
-                Shop theShop = new Shop(theInventory, suppliers, serverSocket.accept());
+                Shop theShop = new Shop(serverSocket.accept(), theInventory, suppliers);
                 pool.execute(theShop);
             }
         } catch(IOException e) {
@@ -130,7 +130,7 @@ public class Server {
      * @param args Command line arguments
      */
     public static void main(String[] args) {
-        Server server = new Server(5050);
+        Server server = new Server(5000);
         DbController db = new DbController();
         server.communicate();
     }
