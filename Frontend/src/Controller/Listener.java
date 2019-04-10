@@ -34,7 +34,26 @@ public class Listener {
       } catch (IOException e) {
         return "There was an error fetching tools.";
       }
+    } else if (action.startsWith("SEARCH/TOOL/ID/") || action.startsWith("SEARCH/TOOL/NAME/")) {
+      try {
+        return client.simpleOperation(action);
+      } catch (IOException e) {
+        return "There was an error searching for the tool";
+      }
+    } else if (action.startsWith("GET/TOOL/QUANTITY/")) {
+      try {
+        return client.simpleOperation(action);
+      } catch (IOException e) {
+        return "There was an error searching for the tool";
+      }
+    } else if (action.startsWith("DECREASE/TOOL/QUANTITY/")) {
+      try {
+        return client.simpleOperation(action);
+      } catch (IOException e) {
+        return "There was an error searching for the tool";
+      }
     }
-    return "";
+    
+    return "NULL";
   }
 }

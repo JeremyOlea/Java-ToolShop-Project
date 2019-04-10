@@ -176,6 +176,15 @@ public class Item {
 	}
 
 	/**
+	 * Returns the data of the item in the form of a string without using \t
+	 * @return The item as a String.
+	 */
+	public String toStringNoTabs() {
+		return "Item ID: " + itemId + " Item Name: " + itemName + " Item Quantity: " + 
+	           itemQuantity + "\n";
+	}
+
+	/**
 	 * creates a string with the headers of the data in the item
 	 * @return the headers in the form of a string
 	 */

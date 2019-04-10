@@ -49,10 +49,11 @@ public class Inventory {
 	 * @param name the name of the item
 	 * @return the item with the same name as the param
 	 */
-	synchronized public Item manageItem (String name){
+	synchronized public Item manageItem (String name, DbController db){
 		Item theItem = decreaseItem (name);
 		
 		if (theItem != null){
+			db.decreaseQuantity(theItem);
 			placeOrder (theItem);
 		}
 		return theItem;
@@ -102,7 +103,7 @@ public class Inventory {
 	}
 	public Item searchForItem (String name) {
 		for (Item i: itemList) {
-			if (i.getItemName().equals(name))
+			if (i.getItemName().toUpperCase().equals(name))
 				return i;
 		}
 		return null;

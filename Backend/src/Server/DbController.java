@@ -96,6 +96,18 @@ public class DbController {
     }
   }
 
+  public void decreaseQuantity(Item item) {
+    String sql_stmt = "UPDATE ITEMS SET quantity = ? WHERE id = ?";
+    try {
+      PreparedStatement pstmt = connection.prepareStatement(sql_stmt);
+      pstmt.setInt(1, item.getItemQuantity());
+      pstmt.setInt(2, item.getItemId());
+      pstmt.executeUpdate();
+    } catch (SQLException e) {
+      e.printStackTrace();
+    }
+  }
+
   public void fetchSuppliers(List<Supplier> suppliers) {
     try {
       String sql_stmt = "SELECT * FROM SUPPLIERS";

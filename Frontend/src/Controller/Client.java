@@ -45,7 +45,7 @@ public class Client {
    * @throws IOException In case there's an input/output error with the socket.
    */
   public String displayAllTools() throws IOException {
-    socketOut.println("GET/TOOLS");
+    sendString("GET/TOOLS");
     String response = socketIn.readLine();
     StringBuilder data = new StringBuilder();
     while (! response.equals("GET/TOOLS")) {
@@ -55,6 +55,23 @@ public class Client {
     }
     return data.toString();
   }
+
+  public String simpleOperation(String input) throws IOException{
+    sendString(input);
+    String response = socketIn.readLine();
+    System.out.println(response.toString());
+    socketIn.readLine();
+    return response.toString();
+  }
+
+  /**
+	 * Send output to socket.
+	 * @param send String to send.
+	 */
+	public void sendString(String send) {
+    socketOut.println(send);
+    socketOut.flush();
+}
 
   /**
    * Closes all connections to the socket.

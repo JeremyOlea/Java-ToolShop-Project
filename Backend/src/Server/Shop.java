@@ -67,7 +67,7 @@ public class Shop implements Runnable{
 	public void communicate() {
 		String input = "";
 		while(true) {
-            try {
+            try { 
                 input = socketIn.readLine();
 				System.out.println(input);
 				refreshInventory();
@@ -91,11 +91,16 @@ public class Shop implements Runnable{
 					sendString(decreaseItem(toolName));
 				}
             } catch(IOException e) {
-                System.err.println(e.getMessage());
+				e.printStackTrace();
+				close();
             }           
         }
 	}
 
+	/**
+	 * Send output to socket.
+	 * @param send String to send.
+	 */
 	public void sendString(String send) {
         socketOut.println(send);
         socketOut.flush();
@@ -164,7 +169,7 @@ public class Shop implements Runnable{
 	 * @return String containing info about whether or not the transaction succeeded.
 	 */
 	public String decreaseItem (String name) {
-		if (theInventory.manageItem(name) == null)
+		if (theInventory.manageItem(name, db) == null)
 			return "Couldn't not decrease item quantity!\n";
 		else
 			return "Item quantity was decreased!\n";
@@ -190,7 +195,7 @@ public class Shop implements Runnable{
 		if (theItem == null)
 		     return "Item " + name + " could not be found!";
 		else
-			 return outputItem (theItem);
+			 return theItem.toStringNoTabs();
 			
 	}
 
@@ -204,7 +209,7 @@ public class Shop implements Runnable{
 		if (theItem == null)
 		     return "Item number " + id + " could not be found!";
 		else
-			return outputItem (theItem);	 
+			return theItem.toStringNoTabs(); 
 	}
 	
 	/**

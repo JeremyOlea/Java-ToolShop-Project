@@ -79,8 +79,36 @@ public class Frame extends JFrame {
     });
 
     JButton search = new JButton("Search");
+    search.addActionListener( new ActionListener() {
+      @Override
+      public void actionPerformed(ActionEvent e) {
+        String searchOption =(String) JOptionPane.showInputDialog("Would you like to search by name or id?").toUpperCase();
+        if(searchOption.equals("NAME") || searchOption.equals("ID")) {
+          String input = (String) JOptionPane.showInputDialog("Which Item would you like to look for?").toUpperCase();
+          String toolInfo = listener.actionPerformed("SEARCH/TOOL" + "/" + searchOption + "/" + input);
+          JOptionPane.showMessageDialog(null, toolInfo);
+        } else {
+          JOptionPane.showMessageDialog(null, "Invalid search option");
+        }
+      }
+    });
     JButton decrease = new JButton("Decrease Quantity");
+    decrease.addActionListener( new ActionListener() {
+      @Override public void actionPerformed(ActionEvent e) {
+        String input = (String) JOptionPane.showInputDialog("Which Item would you like to decrease").toUpperCase();
+        String quantity = listener.actionPerformed("DECREASE/TOOL/QUANTITY/" + input);
+        JOptionPane.showMessageDialog(null, quantity);
+      }
+    });
     JButton check = new JButton("Check Item Quantity");
+    check.addActionListener( new ActionListener() {
+      @Override
+      public void actionPerformed(ActionEvent e) {
+        String input = (String) JOptionPane.showInputDialog("Which Item would you like to check the quantity for?").toUpperCase();
+        String quantity = listener.actionPerformed("GET/TOOL/QUANTITY/" + input);
+        JOptionPane.showMessageDialog(null, quantity);
+      }
+    });
     southPanel.add(search);
     southPanel.add(displayAllTools);
     southPanel.add(decrease);
