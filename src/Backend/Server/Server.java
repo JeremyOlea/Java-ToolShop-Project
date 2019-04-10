@@ -23,10 +23,16 @@ public class Server {
     private ExecutorService pool;
 
     /**
+     * Database Controller to interact with MySQL db.
+     */
+    private DbController db;
+
+    /**
      * Constructor for Server
      * @param portNumber port used for Socket
      */
     public Server(int portNumber) {
+        db = new DbController();
         try {
             serverSocket = new ServerSocket(portNumber);
             pool = Executors.newCachedThreadPool();
@@ -40,8 +46,8 @@ public class Server {
      */
     public void communicate() {
         ArrayList<Supplier> suppliers = new ArrayList<Supplier>();
-		readSuppliers(suppliers);
-        Inventory theInventory = new Inventory(readItems(suppliers));
+		db.fetchSuppliers(suppliers);
+        Inventory theInventory = new Inventory(db.fetchItems(suppliers));
         try {
             while(true) {
                 Shop theShop = new Shop(serverSocket.accept(), theInventory, suppliers);
@@ -49,81 +55,11 @@ public class Server {
             }
         } catch(IOException e) {
             e.printStackTrace();
-            pool.shutdown();
+            pool.shutdown();     
+            db.close();       
         }
         
-    }
-    
-    /**
-     * Reads all suppliers from text file into an ArrayList
-     * @param suppliers ArrayList of all suppliers
-     */
-    public void readSuppliers(ArrayList<Supplier> suppliers) {
-		try {
-            FileReader fr = new FileReader("suppliers.txt");
-			BufferedReader br = new BufferedReader(fr);
-
-			String line = "";
-			while ((line = br.readLine()) != null) {
-				String[] temp = line.split(";");
-				suppliers.add(new Supplier(Integer.parseInt(temp[0]), temp[1], temp[2], temp[3]));
-            }
-            br.close();
-		} catch (Exception e) {
-			System.out.println(e.getMessage());
-		}
-    }
-    
-    /**
-     * Reads all the items from text file
-     * @param suppliers ArrayList of suppliers
-     * @return ArrayList of items read from file
-     */
-    private ArrayList<Item> readItems(ArrayList<Supplier> suppliers) {
-
-		ArrayList<Item> items = new ArrayList<Item>();
-
-		try {
-			FileReader fr = new FileReader("items.txt");
-            BufferedReader br = new BufferedReader(fr);
-
-			String line = "";
-			while ((line = br.readLine()) != null) {
-				String[] temp = line.split(";");
-				int supplierId = Integer.parseInt(temp[4]);
-
-				Supplier theSupplier = findSupplier(supplierId, suppliers);
-				if (theSupplier != null) {
-					Item myItem = new Item(Integer.parseInt(temp[0]), temp[1], Integer.parseInt(temp[2]),
-							Double.parseDouble(temp[3]), theSupplier);
-					items.add(myItem);
-					theSupplier.getItemList().add(myItem);
-				}
-            }
-            br.close();
-		} catch (Exception e) {
-			System.out.println(e.getMessage());
-		}
-		return items;
-    }
-    
-    /**
-     * Finds supplier given an ID
-     * @param supplierId ID of supplier to be found
-     * @param suppliers ArrayList of all suppliers
-     * @return The supplier with the same ID
-     */
-    private Supplier findSupplier(int supplierId, ArrayList<Supplier> suppliers) {
-		Supplier theSupplier = null;
-		for (Supplier s : suppliers) {
-			if (s.getSupId() == supplierId) {
-				theSupplier = s;
-				break;
-			}
-
-		}
-		return theSupplier;
-    }
+    }   
     
     /**
      * Creates server object and runs communicate class
@@ -131,7 +67,6 @@ public class Server {
      */
     public static void main(String[] args) {
         Server server = new Server(5000);
-        DbController db = new DbController();
         server.communicate();
     }
 

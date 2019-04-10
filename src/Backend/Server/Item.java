@@ -54,7 +54,7 @@ public class Item {
 		itemName = name;
 		itemQuantity = quanitiy;
 		itemPrice = price;
-		sup = theSupplier; 
+		theSupplier = sup;
 		setAlreadyOrdered(false);
 	}
 	
