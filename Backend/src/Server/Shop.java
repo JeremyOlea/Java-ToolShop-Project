@@ -1,4 +1,4 @@
-package Backend.Server;
+package Server;
 
 import java.util.ArrayList;
 import java.net.Socket;

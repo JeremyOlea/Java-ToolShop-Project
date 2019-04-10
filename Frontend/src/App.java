@@ -1,7 +1,5 @@
-package Frontend;
-
-import Frontend.GUI.*;
-import Frontend.Controller.*;
+import GUI.*;
+import Controller.*;
 import javax.swing.UIManager;
 
 /**

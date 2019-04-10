@@ -8,29 +8,19 @@
       "type": "java",
       "name": "Client",
       "request": "launch",
-      "mainClass": "Frontend.App"
-    },
-    {
-      "type": "java",
-      "name": "Server",
-      "request": "launch",
-      "mainClass": "Backend.Server.Server"
+      "mainClass": "App"
     },
     {
       "type": "java",
       "name": "Client2",
       "request": "launch",
-      "mainClass": "Frontend.App"
+      "mainClass": "App"
     }
   ],
   "compounds": [
     {
-      "name": "Client + Server",
-      "configurations": ["Server", "Client"]
-    },
-    {
-      "name": "2 Clients + Server",
-      "configurations": ["Server", "Client", "Client2"]
+      "name": "2 Clients",
+      "configurations": ["Client", "Client2"]
     }
   ]
 }

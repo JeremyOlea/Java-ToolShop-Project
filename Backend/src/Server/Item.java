@@ -1,4 +1,4 @@
-package Backend.Server;
+package Server;
 /**
  * An item inside the shop
  * @author M. Moshirpour, Michael Jeremy Olea, Oscar Wong

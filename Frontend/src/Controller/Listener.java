@@ -1,4 +1,4 @@
-package Frontend.Controller;
+package Controller;
 
 import java.io.IOException;
 

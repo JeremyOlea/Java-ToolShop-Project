@@ -1,4 +1,4 @@
-package Backend.Server;
+package Server;
 
 /**
  * A single order for an item

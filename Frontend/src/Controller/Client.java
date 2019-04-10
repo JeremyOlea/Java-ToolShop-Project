@@ -1,4 +1,4 @@
-package Frontend.Controller;
+package Controller;
 
 import java.net.Socket;
 import java.io.*;
