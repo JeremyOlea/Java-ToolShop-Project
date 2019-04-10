@@ -33,6 +33,11 @@ public class Shop implements Runnable{
 	 * Socket for client
 	 */
 	private Socket clientSocket;
+
+	/**
+	 * Database Controller.
+	 */
+	private DbController db;
 	
 	/**
 	 * Constructs a new Shop.
@@ -51,6 +56,10 @@ public class Shop implements Runnable{
         }		
 	}
 
+	public void setDbController(DbController db) {
+		this.db = db;
+	}
+
 	public void run() {
 		this.communicate();
 	}
@@ -60,10 +69,27 @@ public class Shop implements Runnable{
 		while(true) {
             try {
                 input = socketIn.readLine();
-                System.out.println(input);
+				System.out.println(input);
+				refreshInventory();
                 if(input.equals("GET/TOOLS")) {
-                    this.getTools();
-                }
+					sendString(theInventory.toString());
+					sendString("GET/TOOLS");
+				}
+				else if(input.startsWith("SEARCH/TOOL/NAME/")) {
+					String toolName = input.replace("SEARCH/TOOL/NAME/", "");
+					sendString(getItem(toolName));
+				}
+				else if (input.startsWith("SEARCH/TOOL/ID/")) {
+					int toolId = Integer.parseInt(input.replace("SEARCH/TOOL/ID/", ""));
+					sendString(getItem(toolId));
+				}
+				else if (input.startsWith("GET/TOOL/QUANTITY/")) {
+					String toolName = input.replace("GET/TOOL/QUANTITY/", "");
+					sendString(getItemQuantity(toolName));
+				} else if (input.startsWith("DECREASE/TOOL/QUANTITY/")) {
+					String toolName = input.replace("DECREASE/TOOL/QUANTITY/", "");
+					sendString(decreaseItem(toolName));
+				}
             } catch(IOException e) {
                 System.err.println(e.getMessage());
             }           
@@ -75,15 +101,12 @@ public class Shop implements Runnable{
         socketOut.flush();
     }
 
-    public void getTools() {
-        Inventory temp = this.getTheInventory();
-        String output = "";
-        for(int i = 0; i < temp.getItemList().size(); i++) {
-            output += temp.getItemList().get(i).toString();
-        }
-        sendString(output);
-        sendString("GET/TOOLS");
+	public void refreshInventory() {
+		//	update the inventory from the database
+		db.fetchSuppliers(supplierList);
+		theInventory = new Inventory(db.fetchItems(supplierList));
 	}
+
     /**
      * CLoses the socket, printwrite and bufferedreader
      */

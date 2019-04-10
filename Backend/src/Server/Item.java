@@ -38,7 +38,7 @@ public class Item {
 	/**
 	 * Minimum quantity of items allowed
 	 */
-	private static final int MINIMUMUMBER = 20; 	
+	private static final int MINIMUMUMBER = 40; 	
 	
 	/**
 	 * Constructor for item

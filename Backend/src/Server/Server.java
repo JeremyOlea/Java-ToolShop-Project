@@ -51,6 +51,7 @@ public class Server {
         try {
             while(true) {
                 Shop theShop = new Shop(serverSocket.accept(), theInventory, suppliers);
+                theShop.setDbController(db);
                 pool.execute(theShop);
             }
         } catch(IOException e) {
