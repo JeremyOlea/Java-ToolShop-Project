@@ -4,9 +4,18 @@ import java.sql.*;
 import java.util.*;
 import java.io.*;
 
+/**
+ * Class to control the database from the server.
+ */
 public class DbController {
+  /**
+   * Connection to the database.
+   */
   Connection connection;
 
+  /**
+   * Constructs a new database controller.
+   */
   public DbController() {
     super();
     try {
@@ -17,6 +26,9 @@ public class DbController {
     }    
   }
 
+  /**
+   * Creates a new MySQL database.
+   */
   private void createDatabase() {
     String sql_stmt = "CREATE DATABASE `toolshop_db`;";
     try {
@@ -41,6 +53,9 @@ public class DbController {
     }
   }
 
+  /**
+   * Populate the suppliers from the text file on the database.
+   */
   public void populateSuppliers() {
     try {
       String sql_stmt = "CREATE TABLE suppliers" + "(id INTEGER not NULL, " + "name VARCHAR(255), "
@@ -68,6 +83,9 @@ public class DbController {
     }
   }
 
+  /**
+   * Populate the items in the database from the text file.
+   */
   public void populateItems() {
     try {
       String sql_stmt = "CREATE TABLE items" + "(id INTEGER not NULL, " + "name VARCHAR(255), "
@@ -96,6 +114,10 @@ public class DbController {
     }
   }
 
+  /**
+   * Decrease an item's quantity.
+   * @param item Item to decrease quantity of.
+   */
   public void decreaseQuantity(Item item) {
     String sql_stmt = "UPDATE ITEMS SET quantity = ? WHERE id = ?";
     try {
@@ -108,6 +130,10 @@ public class DbController {
     }
   }
 
+  /**
+   * Populate the given ArrayList with Suppliers from the db.
+   * @param suppliers ArrayList to populate.
+   */
   public void fetchSuppliers(List<Supplier> suppliers) {
     try {
       String sql_stmt = "SELECT * FROM SUPPLIERS";
@@ -124,6 +150,11 @@ public class DbController {
     }
   }
 
+  /**
+   * Return an ArrayList of Items, linked to a list of Suppliers.
+   * @param suppliers ArrayList of Suppliers to link to.
+   * @return ArrayList of items from the database.
+   */
   public ArrayList<Item> fetchItems(ArrayList<Supplier> suppliers) {
     ArrayList<Item> items = new ArrayList<Item>();
     try {

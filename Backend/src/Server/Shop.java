@@ -56,14 +56,24 @@ public class Shop implements Runnable{
         }		
 	}
 
+	/**
+	 * Link the database controller to the Shop.
+	 * @param db Database controller to set.
+	 */
 	public void setDbController(DbController db) {
 		this.db = db;
 	}
 
+	/**
+	 * Run this thread.
+	 */
 	public void run() {
 		this.communicate();
 	}
 
+	/**
+	 * Communicate with the socket.
+	 */
 	public void communicate() {
 		String input = "";
 		while(true) {

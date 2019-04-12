@@ -3,7 +3,7 @@ package Server;
 import java.util.ArrayList;
 
 /**
- * Inventroy of the shop that holds all the items
+ * Inventory of the shop that holds all the items
  * @author M. Moshirpour, Michael Jeremy Olea, Oscar Wong
  * @version 1.0
  * @since April 4th, 2019

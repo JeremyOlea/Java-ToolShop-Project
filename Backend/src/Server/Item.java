@@ -48,11 +48,11 @@ public class Item {
 	 * @param price price of item
 	 * @param sup supplier of item
 	 */
-	public Item (int id, String name, int quanitiy, double price, Supplier sup) {
+	public Item (int id, String name, int quantity, double price, Supplier sup) {
 		
 		itemId = id;
 		itemName = name;
-		itemQuantity = quanitiy;
+		itemQuantity = quantity;
 		itemPrice = price;
 		theSupplier = sup;
 		setAlreadyOrdered(false);
@@ -96,7 +96,7 @@ public class Item {
 
 	/**
 	 * setter for item id
-	 * @param id id of the item
+	 * @param itemId id of the item
 	 */
 	public void setItemId(int itemId) {
 		this.itemId = itemId;
