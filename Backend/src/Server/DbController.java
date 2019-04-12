@@ -6,6 +6,9 @@ import java.io.*;
 
 /**
  * Class to control the database from the server.
+ * @author Oscar Wong, Jeremy Olea
+ * @version 1.0
+ * @since April 12th, 2019
  */
 public class DbController {
   /**
