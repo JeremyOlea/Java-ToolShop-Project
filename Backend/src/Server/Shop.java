@@ -193,7 +193,7 @@ public class Shop implements Runnable {
 	public String buyItem(String toolName, int quantity) {
 		if (theInventory.getItemQuantity(toolName) >= quantity) {
 			for (int i = 0; i < quantity; i++) {
-				theInventory.manageItem(name, db);
+				theInventory.manageItem(toolName, db);
 			}
 			return "Purchased!";
 		} else {
