@@ -262,7 +262,7 @@ public class Shop implements Runnable {
 	 * @return The Item as a String.
 	 */
 	private String outputItem(Item theItem) {
-		return "The item information is as follows: \n" + theItem;
+		return "The item information is as follows: " + theItem;
 	}
 
 	/**
@@ -276,7 +276,7 @@ public class Shop implements Runnable {
 		if (quantity < 0)
 			return "Item " + name + " could not be found!";
 		else
-			return "The quantity of Item " + name + " is: " + quantity + "\n";
+			return "The quantity of Item " + name + " is: " + quantity;
 	}
 
 	/**
