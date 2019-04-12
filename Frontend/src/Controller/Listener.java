@@ -52,6 +52,12 @@ public class Listener {
       } catch (IOException e) {
         return "There was an error searching for the tool";
       }
+    } else if (action.startsWith("BUY/TOOL/")) {
+      try {
+        return client.simpleOperation(action);
+      } catch (IOException e) {
+        return "There was an error searching for the tool";
+      }
     }
     
     return "NULL";

@@ -60,7 +60,6 @@ public class Client {
     sendString(input);
     String response = socketIn.readLine();
     System.out.println(response.toString());
-    socketIn.readLine();
     return response.toString();
   }
 

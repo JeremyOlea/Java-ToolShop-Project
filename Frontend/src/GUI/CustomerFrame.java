@@ -95,7 +95,7 @@ public class CustomerFrame extends JFrame {
       }
     });
 
-    JButton buyItem = new JButton("Decrease Quantity");
+    JButton buyItem = new JButton("Buy Item");
     buyItem.addActionListener( new ActionListener() {
       @Override public void actionPerformed(ActionEvent e) {
         String input = (String) JOptionPane.showInputDialog("Which Item would you like to buy?").toUpperCase();

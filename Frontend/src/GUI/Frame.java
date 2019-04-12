@@ -137,7 +137,7 @@ public class Frame extends JFrame {
    */
   public void initNorthPanel() {
     northPanel = new JPanel();
-    JLabel text = new JLabel("Welcome to Not Home Depot");
+    JLabel text = new JLabel("CLIENT: Welcome to Not Home Depot");
     northPanel.add(text);
   }
 }

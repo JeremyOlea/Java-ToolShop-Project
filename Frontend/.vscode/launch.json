@@ -15,6 +15,12 @@
       "name": "Client2",
       "request": "launch",
       "mainClass": "App"
+    },
+    {
+      "type": "java",
+      "name": "Customer",
+      "request": "launch",
+      "mainClass": "CustomerApp"
     }
   ],
   "compounds": [

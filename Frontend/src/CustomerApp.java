@@ -18,7 +18,8 @@ public class CustomerApp {
         try {
             UIManager.setLookAndFeel("com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel");
         } catch (Exception ignored) {}
-        Client client = new Client("localhost", 5000);
+        //Client client = new Client("localhost", 5000);
+        Client client = new Client("10.13.99.23", 5000);
         CustomerFrame gui = new CustomerFrame();
         gui.setListener(new Listener(client));
     }
