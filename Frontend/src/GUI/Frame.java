@@ -69,6 +69,7 @@ public class Frame extends JFrame {
   public void initSouthPanel() {
     southPanel = new JPanel();
     JButton displayAllTools = new JButton("Display All Tools");
+
     displayAllTools.addActionListener(new ActionListener() {
       @Override
       public void actionPerformed(ActionEvent e) {
@@ -79,6 +80,7 @@ public class Frame extends JFrame {
     });
 
     JButton search = new JButton("Search");
+
     search.addActionListener( new ActionListener() {
       @Override
       public void actionPerformed(ActionEvent e) {
@@ -92,6 +94,7 @@ public class Frame extends JFrame {
         }
       }
     });
+
     JButton decrease = new JButton("Decrease Quantity");
     decrease.addActionListener( new ActionListener() {
       @Override public void actionPerformed(ActionEvent e) {
@@ -100,6 +103,7 @@ public class Frame extends JFrame {
         JOptionPane.showMessageDialog(null, quantity);
       }
     });
+
     JButton check = new JButton("Check Item Quantity");
     check.addActionListener( new ActionListener() {
       @Override
@@ -109,6 +113,7 @@ public class Frame extends JFrame {
         JOptionPane.showMessageDialog(null, quantity);
       }
     });
+    
     southPanel.add(search);
     southPanel.add(displayAllTools);
     southPanel.add(decrease);

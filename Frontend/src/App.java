@@ -11,6 +11,8 @@ import javax.swing.UIManager;
 public class App {
     /**
      * Method to run the Client and GUI.
+     * @param args Command Line Arguments
+     * @throws Exception an exception if something goes wrong
      */
     public static void main(String[] args) throws Exception {
         try {
