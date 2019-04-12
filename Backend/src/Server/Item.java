@@ -172,7 +172,7 @@ public class Item {
 	 */
 	public String toString () {
 		return "Item ID: " + itemId + "\tItem Name: " + itemName + "\tItem Quantity: " + 
-	           itemQuantity + "\n";
+	           itemQuantity;
 	}
 
 	/**
@@ -181,7 +181,7 @@ public class Item {
 	 */
 	public String toStringNoTabs() {
 		return "Item ID: " + itemId + " Item Name: " + itemName + " Item Quantity: " + 
-	           itemQuantity + "\n";
+	           itemQuantity;
 	}
 
 	/**
