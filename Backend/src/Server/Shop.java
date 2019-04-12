@@ -99,8 +99,8 @@ public class Shop implements Runnable {
 				} else if (input.startsWith("DECREASE/TOOL/QUANTITY/")) {
 					String toolName = input.replace("DECREASE/TOOL/QUANTITY/", "");
 					sendString(decreaseItem(toolName));
-				} else if (input.startsWith("BUY/TOOL/NAME/")) {
-					String rest = input.replace("/BUY/TOOL/NAME/", "");
+				} else if (input.startsWith("BUY/TOOL/")) {
+					String rest = input.replace("BUY/TOOL/", "");
 					String[] inputs = rest.split("/");
 					String toolName = inputs[0];
 					int quantity = Integer.parseInt(inputs[1]);
@@ -109,6 +109,7 @@ public class Shop implements Runnable {
 			} catch (IOException e) {
 				e.printStackTrace();
 				close();
+				return;
 			}
 		}
 	}
@@ -210,9 +211,9 @@ public class Shop implements Runnable {
 	 */
 	public String decreaseItem(String name) {
 		if (theInventory.manageItem(name, db) == null)
-			return "Couldn't not decrease item quantity!\n";
+			return "Couldn't not decrease item quantity!";
 		else
-			return "Item quantity was decreased!\n";
+			return "Item quantity was decreased!";
 	}
 
 	/**
@@ -261,7 +262,7 @@ public class Shop implements Runnable {
 	 * @return The Item as a String.
 	 */
 	private String outputItem(Item theItem) {
-		return "The item information is as follows: \n" + theItem;
+		return "The item information is as follows: " + theItem;
 	}
 
 	/**
@@ -275,7 +276,7 @@ public class Shop implements Runnable {
 		if (quantity < 0)
 			return "Item " + name + " could not be found!";
 		else
-			return "The quantity of Item " + name + " is: " + quantity + "\n";
+			return "The quantity of Item " + name + " is: " + quantity;
 	}
 
 	/**

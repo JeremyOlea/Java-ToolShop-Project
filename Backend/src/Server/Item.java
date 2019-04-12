@@ -181,7 +181,7 @@ public class Item {
 	 */
 	public String toStringNoTabs() {
 		return "Item ID: " + itemId + " Item Name: " + itemName + " Item Quantity: " + 
-	           itemQuantity + "\n";
+	           itemQuantity;
 	}
 
 	/**
