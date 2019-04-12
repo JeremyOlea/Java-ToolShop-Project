@@ -109,6 +109,7 @@ public class Shop implements Runnable {
 			} catch (IOException e) {
 				e.printStackTrace();
 				close();
+				return;
 			}
 		}
 	}
