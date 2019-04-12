@@ -1,0 +1,1 @@
+typeSearchIndex = [{"p":"Server","l":"DbController"},{"p":"Server","l":"Inventory"},{"p":"Server","l":"Item"},{"p":"Server","l":"Order"},{"p":"Server","l":"OrderLine"},{"p":"Server","l":"Server"},{"p":"Server","l":"Shop"},{"p":"Server","l":"Supplier"}]
