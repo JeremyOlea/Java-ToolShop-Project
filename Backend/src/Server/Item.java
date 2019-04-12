@@ -172,7 +172,7 @@ public class Item {
 	 */
 	public String toString () {
 		return "Item ID: " + itemId + "\tItem Name: " + itemName + "\tItem Quantity: " + 
-	           itemQuantity;
+	           itemQuantity + "\n";
 	}
 
 	/**
